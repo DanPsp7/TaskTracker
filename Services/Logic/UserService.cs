@@ -12,23 +12,23 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public Task<List<User>> GetUser()
+    public async Task<List<User>> GetUser()
     {
-        throw new NotImplementedException();
+        return await _userRepository.GetAllUsers();
     }
 
-    public Task CreateUser(User user)
+    public async Task CreateUser(User user)
     {
-        throw new NotImplementedException();
+        await _userRepository.CreateUser(user);
     }
 
-    public Task UpdateUser(int id, User user)
+    public async Task UpdateUser(int id, User user)
     {
-        throw new NotImplementedException();
+        await _userRepository.UpdateUser(id, user);
     }
 
-    public Task DeleteUser(int id)
+    public async Task DeleteUser(int id)
     {
-        throw new NotImplementedException();
+        await _userRepository.DeleteUser(id);
     }
 }

@@ -12,23 +12,23 @@ public class TeamService : ITeamService
         _teamRepository = teamRepository;
     }
 
-    public Task<List<Team>> GetTeam()
+    public async Task<List<Team>> GetTeam()
     {
-        throw new NotImplementedException();
+        return await _teamRepository.GetAllTeams();
     }
 
-    public Task CreateTeam(Team team)
+    public async Task CreateTeam(Team team)
     {
-        throw new NotImplementedException();
+        await _teamRepository.CreateTeam(team);
     }
 
-    public Task UpdateTeam(int id, Team team)
+    public async Task UpdateTeam(int id, Team team)
     {
-        throw new NotImplementedException();
+        await _teamRepository.UpdateTeam(id, team);
     }
 
-    public Task DeleteTeam(int id)
+    public async Task DeleteTeam(int id)
     {
-        throw new NotImplementedException();
+        await _teamRepository.DeleteTeam(id);
     }
 }
