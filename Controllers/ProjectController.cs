@@ -4,6 +4,7 @@ using TaskTracker.Data;
 using TaskTracker.Dto;
 using TaskTracker.Models;
 using TaskTracker.Services;
+using TaskTracker.Services.Interfaces;
 
 
 namespace TaskTracker.Controllers
@@ -23,7 +24,7 @@ namespace TaskTracker.Controllers
         [HttpGet]
         [Route("Get")]
         [Produces("application/json")]
-        public async Task<List<Project>> Get(int id)
+        public async Task<List<Project>> Get()
         {
             return await _projectService.GetProject();
         }

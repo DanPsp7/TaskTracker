@@ -1,5 +1,6 @@
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
+using TaskTracker.Services.Interfaces;
 
 namespace TaskTracker.Services.Logic;
 

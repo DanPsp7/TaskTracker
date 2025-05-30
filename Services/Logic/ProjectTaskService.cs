@@ -1,10 +1,10 @@
-using TaskTracker.Dto;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
+using TaskTracker.Services.Interfaces;
 
-namespace TaskTracker.Services;
+namespace TaskTracker.Services.Logic;
 
-public class ProjectTaskService
+public class ProjectTaskService : IProjectTaskService
 {
     private readonly IProjectTaskRepository _projectTaskRepository;
 

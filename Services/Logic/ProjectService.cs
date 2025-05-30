@@ -1,9 +1,8 @@
-using TaskTracker.Dto;
 using TaskTracker.Models;
-using TaskTracker.Repository;
 using TaskTracker.Repository.Interfaces;
+using TaskTracker.Services.Interfaces;
 
-namespace TaskTracker.Services;
+namespace TaskTracker.Services.Logic;
 
 public class ProjectService : IProjectService
 {
