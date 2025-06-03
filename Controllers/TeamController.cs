@@ -7,7 +7,7 @@ using TaskTracker.Services.Interfaces;
 namespace TaskTracker.Controllers;
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class TeamController : Controller
     {
         private readonly ITeamService  _teamService;
@@ -24,8 +24,7 @@ namespace TaskTracker.Controllers;
             return await _teamService.GetTeam();
         }
 
-        [HttpPost]
-        [Route("Create")]
+        [HttpPost("Create")]
         public async Task Create([FromBody] Team team)
         {
             await _teamService.CreateTeam(team);
