@@ -10,7 +10,7 @@ namespace TaskTracker.Data
 {
     public class TaskTrackerContext : DbContext
     {
-        public TaskTrackerContext (DbContextOptions<TaskTrackerContext> options)
+        public TaskTrackerContext(DbContextOptions<TaskTrackerContext> options)
             : base(options)
         {
         }

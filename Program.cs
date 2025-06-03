@@ -13,7 +13,7 @@ var app = builder.Build();
 
 
 builder.Services.AddDbContext<TaskTrackerContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("TaskTrackerContext") ?? throw new InvalidOperationException("Connection string 'TaskTrackerContext' not found.")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("TaskTracker") ?? throw new InvalidOperationException("Connection string 'TaskTracker' not found.")));
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -32,7 +32,10 @@ builder.Services.AddSwaggerGen();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => 
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
 }
 
 app.UseHttpsRedirection();
