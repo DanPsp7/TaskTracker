@@ -13,4 +13,6 @@ public interface ITeamRepository
     
     Task DeleteTeam(int id);
     
+    Task AddTeamToProject(int id, Project project);
+    
 }

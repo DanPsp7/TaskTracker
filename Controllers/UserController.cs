@@ -44,4 +44,11 @@ namespace TaskTracker.Controllers;
         {
             await _userService.DeleteUser(id);
         }
+
+        [HttpPost]
+        [Route("AddUserToTeam")]
+        public async Task AddUserToTeam(int id, [FromBody] Team team)
+        {
+            await _userService.AddUserToTeam(id, team);
+        }
     }

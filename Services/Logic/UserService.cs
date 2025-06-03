@@ -32,4 +32,9 @@ public class UserService : IUserService
     {
         await _userRepository.DeleteUser(id);
     }
+
+    public async Task AddUserToTeam(int id, Team team)
+    {
+        await _userRepository.AddUserToTeam(id, team);
+    }
 }

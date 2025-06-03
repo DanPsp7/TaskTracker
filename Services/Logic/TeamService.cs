@@ -32,4 +32,9 @@ public class TeamService : ITeamService
     {
         await _teamRepository.DeleteTeam(id);
     }
+
+    public async Task AddTeamToProject(int id, Project project)
+    {
+        await _teamRepository.AddTeamToProject(id, project);
+    }
 }

@@ -44,5 +44,11 @@ namespace TaskTracker.Controllers;
         {
             await _teamService.DeleteTeam(id);
         }
-        
+
+        [HttpPost]
+        [Route("AddTeamToProject")]
+        public async Task AddTeamToProject(int id, [FromBody] Project project)
+        {
+            await _teamService.AddTeamToProject(id, project);
+        }
     }

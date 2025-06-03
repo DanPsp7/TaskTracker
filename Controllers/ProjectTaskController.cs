@@ -47,4 +47,39 @@ namespace TaskTracker.Controllers;
         {
             await _projectTaskService.DeleteTask(id);
         }
+
+        [HttpPost]
+        [Route("Start")]
+        public async Task Start(int id)
+        {
+            await _projectTaskService.StartTask(id);
+        }
+
+        [HttpPost]
+        [Route("Stop")]
+        public async Task Stop(int id)
+        {
+            await _projectTaskService.StopTask(id);
+        }
+
+        [HttpPost]
+        [Route("Done")]
+        public async Task Done(int id)
+        {
+            await _projectTaskService.DoneTask(id);
+        }
+
+        [HttpPost]
+        [Route("Assign")]
+        public async Task Assign(int id, User user)
+        {
+            await _projectTaskService.AssignTask(id, user);
+        }
+
+        [HttpPost]
+        [Route("AddTaskTOProject")]
+        public async Task AddTaskToProject(int id, Project project)
+        {
+            await _projectTaskService.AddTaskToProject(id, project);
+        }
     }

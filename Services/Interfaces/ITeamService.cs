@@ -9,4 +9,5 @@ public interface ITeamService
     Task CreateTeam(Team team);
     Task UpdateTeam(int id, Team team);
     Task DeleteTeam(int id);
+    Task AddTeamToProject(int id, Project project);
 }

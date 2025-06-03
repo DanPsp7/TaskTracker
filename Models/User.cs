@@ -10,7 +10,7 @@ namespace TaskTracker.Models
         public string Name { get; set; } = null!;
 
         public int TeamId { get; set; }
-        public Team Team { get; set; } = new Team();
+        public Team Team { get; set; } 
 
  
         public ProjectTask? ProjectTasks { get; set; }

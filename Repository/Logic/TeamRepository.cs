@@ -38,4 +38,12 @@ public class TeamRepository : ITeamRepository
     {
         _context.Remove(await _context.Teams.SingleOrDefaultAsync(t => t.Id == id));
     }
+
+    public async Task AddTeamToProject(int teamId, Project project)
+    {
+        var  teams = await _context.Teams.FindAsync(teamId);
+        teams.Project = project;
+        await _context.SaveChangesAsync();
+    }
+   
 }

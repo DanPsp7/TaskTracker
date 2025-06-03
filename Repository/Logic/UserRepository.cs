@@ -40,4 +40,12 @@ public class UserRepository : IUserRepository
         _context.Users.Remove(await _context.Users.FindAsync(id));
         await _context.SaveChangesAsync();
     }
+
+    public async Task AddUserToTeam(int userId, Team team)
+    {
+        var users = await _context.Users.FindAsync(userId);
+        users.Team = team;
+        await _context.SaveChangesAsync();
+    }
+    
 }

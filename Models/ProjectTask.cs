@@ -10,8 +10,7 @@ namespace TaskTracker.Models
         Free,       // Задача свободна
         Working,    // В работе
         Done,       // Завершена
-        Paused,     // Приостановлена
-        Cancelled   // Отменена
+        Paused     // Приостановлена
     }
 
 

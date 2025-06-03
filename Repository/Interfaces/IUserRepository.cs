@@ -12,4 +12,5 @@ public interface IUserRepository
     Task UpdateUser(int id, User user);
     
     Task DeleteUser(int id);
+    Task AddUserToTeam(int id, Team team);
 }

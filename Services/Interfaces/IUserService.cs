@@ -9,4 +9,5 @@ public interface IUserService
     Task CreateUser(User user);
     Task UpdateUser(int id, User user);
     Task DeleteUser(int id);
+    Task AddUserToTeam(int id, Team team);
 }
