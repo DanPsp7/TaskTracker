@@ -17,8 +17,7 @@ namespace TaskTracker.Controllers;
             _teamService = teamService;
         }
 
-        [HttpGet]
-        [Route("Get")]
+        [HttpGet("Get")]
         public async Task<List<Team>> Get()
         {
             return await _teamService.GetTeam();
@@ -30,22 +29,19 @@ namespace TaskTracker.Controllers;
             await _teamService.CreateTeam(team);
         }
 
-        [HttpPut]
-        [Route("Update")]
+        [HttpPut("Update")]
         public async Task Update(int id, [FromBody] Team team)
         {
             await _teamService.UpdateTeam(id, team);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
+        [HttpDelete("Delete")]
         public async Task Delete(int id)
         {
             await _teamService.DeleteTeam(id);
         }
 
-        [HttpPost]
-        [Route("AddTeamToProject")]
+        [HttpPost("AddTeamToProject")]
         public async Task AddTeamToProject(int id, [FromBody] Project project)
         {
             await _teamService.AddTeamToProject(id, project);

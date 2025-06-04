@@ -9,7 +9,7 @@ namespace TaskTracker.Controllers;
 
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ProjectTaskController : Controller
     {
         private readonly IProjectTaskService _projectTaskService;
@@ -19,65 +19,55 @@ namespace TaskTracker.Controllers;
             _projectTaskService = projectTaskService;
         }
 
-        [HttpGet]
-        [Route("Get")]
-        [Produces("application/json")]
+        [HttpGet("Get")]
         public async Task<List<ProjectTask>> Get()
         {
             return await _projectTaskService.GetTask();
         }
 
-        [HttpPost]
-        [Route("Create")]
+        [HttpPost("Create")]
         public async Task Create(ProjectTask projectTask)
         {
             await _projectTaskService.CreateTask(projectTask);
         }
 
-        [HttpPut]
-        [Route("Update")]
+        [HttpPut("Update")]
         public async Task Update(int id, ProjectTask projectTask)
         {
             await _projectTaskService.UpdateTask(id, projectTask);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
+        [HttpDelete("Delete")]
         public async Task Delete(int id)
         {
             await _projectTaskService.DeleteTask(id);
         }
 
-        [HttpPost]
-        [Route("Start")]
+        [HttpPost("Start")]
         public async Task Start(int id)
         {
             await _projectTaskService.StartTask(id);
         }
 
-        [HttpPost]
-        [Route("Stop")]
+        [HttpPost("Stop")]
         public async Task Stop(int id)
         {
             await _projectTaskService.StopTask(id);
         }
 
-        [HttpPost]
-        [Route("Done")]
+        [HttpPost("Done")]
         public async Task Done(int id)
         {
             await _projectTaskService.DoneTask(id);
         }
 
-        [HttpPost]
-        [Route("Assign")]
+        [HttpPost("Assign")]
         public async Task Assign(int id, User user)
         {
             await _projectTaskService.AssignTask(id, user);
         }
 
-        [HttpPost]
-        [Route("AddTaskTOProject")]
+        [HttpPost("AddTaskTOProject")]
         public async Task AddTaskToProject(int id, Project project)
         {
             await _projectTaskService.AddTaskToProject(id, project);

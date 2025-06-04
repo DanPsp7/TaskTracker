@@ -7,7 +7,7 @@ namespace TaskTracker.Controllers;
 
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class UserController : Controller 
     {   
         private readonly IUserService _userService;
@@ -17,36 +17,31 @@ namespace TaskTracker.Controllers;
             _userService = userService;
         }
 
-        [HttpGet]
-        [Route("Get")]
+        [HttpGet("Get")]
         public async Task<List<User>> Get()
         {
             return await _userService.GetUser();
         }
         
-        [HttpPost]
-        [Route("Create ")]
+        [HttpPost("Create")]
         public async Task Create([FromBody] User user)
         {
             await _userService.CreateUser(user);
         }
 
-        [HttpPut]
-        [Route("Update ")]
+        [HttpPut("Update")]
         public async Task Update(int id, [FromBody] User user)
         {
             await _userService.UpdateUser(id, user);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
+        [HttpDelete("Delete")]
         public async Task Delete(int id)
         {
             await _userService.DeleteUser(id);
         }
 
-        [HttpPost]
-        [Route("AddUserToTeam")]
+        [HttpPost("AddUserToTeam")]
         public async Task AddUserToTeam(int id, [FromBody] Team team)
         {
             await _userService.AddUserToTeam(id, team);

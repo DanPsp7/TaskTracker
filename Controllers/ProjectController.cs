@@ -21,31 +21,26 @@ namespace TaskTracker.Controllers
             _projectService = projectService;
         }
 
-        [HttpGet]
-        [Route("Get")]
-        [Produces("application/json")]
+        [HttpGet("Get")]
         public async Task<List<Project>> Get()
         {
             return await _projectService.GetProject();
         }
 
 
-        [HttpPost]
-        [Route("Create")]
+        [HttpPost("Create")]
         public async Task Create(Project projectDto)
         {
             await _projectService.CreateProject(projectDto);
         }
 
-        [HttpPut]
-        [Route("Update")]
+        [HttpPut("Update")]
         public async Task Update(int id, Project projectDto)
         {
             await _projectService.UpdateProject(id, projectDto);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
+        [HttpDelete("Delete")]
         public async Task Delete(int id)
         {
             await _projectService.DeleteProject(id);
