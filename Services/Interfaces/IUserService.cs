@@ -1,3 +1,4 @@
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 
 namespace TaskTracker.Services.Interfaces;
@@ -6,8 +7,8 @@ public interface IUserService
 {
     Task<List<User>> GetUser();
     //Task GetProjectById(int id);
-    Task CreateUser(User user);
-    Task UpdateUser(int id, User user);
-    Task DeleteUser(int id);
-    Task AddUserToTeam(int id, Team team);
+    Task CreateUser(AddUserRequest request);
+    Task UpdateUser(UpdateUserRequest request);
+    Task DeleteUser(DeleteUserRequest request);
+    Task AddUserToTeam(UserToTeamRequest request);
 }

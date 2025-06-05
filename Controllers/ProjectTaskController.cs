@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services;
@@ -9,7 +10,7 @@ namespace TaskTracker.Controllers;
 
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ProjectTaskController : Controller
     {
         private readonly IProjectTaskService _projectTaskService;
@@ -19,67 +20,57 @@ namespace TaskTracker.Controllers;
             _projectTaskService = projectTaskService;
         }
 
-        [HttpGet]
-        [Route("Get")]
-        [Produces("application/json")]
+        [HttpGet("Get")]
         public async Task<List<ProjectTask>> Get()
         {
             return await _projectTaskService.GetTask();
         }
 
-        [HttpPost]
-        [Route("Create")]
-        public async Task Create(ProjectTask projectTask)
+        [HttpPost("Create")]
+        public async Task Create([FromBody] AddTaskRequest request)
         {
-            await _projectTaskService.CreateTask(projectTask);
+            await _projectTaskService.CreateTask(request);
         }
 
-        [HttpPut]
-        [Route("Update")]
-        public async Task Update(int id, ProjectTask projectTask)
+        [HttpPut("Update")]
+        public async Task Update([FromBody] UpdateTaskRequest request)
         {
-            await _projectTaskService.UpdateTask(id, projectTask);
+            await _projectTaskService.UpdateTask(request);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
-        public async Task Delete(int id)
+        [HttpDelete("Delete")]
+        public async Task Delete([FromBody] DeleteTaskRequest request)
         {
-            await _projectTaskService.DeleteTask(id);
+            await _projectTaskService.DeleteTask(request);
         }
 
-        [HttpPost]
-        [Route("Start")]
-        public async Task Start(int id)
+        [HttpPost("Start")]
+        public async Task Start([FromBody] ActionTaskRequest request)
         {
-            await _projectTaskService.StartTask(id);
+            await _projectTaskService.StartTask(request);
         }
 
-        [HttpPost]
-        [Route("Stop")]
-        public async Task Stop(int id)
+        [HttpPost("Stop")]
+        public async Task Stop([FromBody] ActionTaskRequest request)
         {
-            await _projectTaskService.StopTask(id);
+            await _projectTaskService.StopTask(request);
         }
 
-        [HttpPost]
-        [Route("Done")]
-        public async Task Done(int id)
+        [HttpPost("Done")]
+        public async Task Done([FromBody] ActionTaskRequest request)
         {
-            await _projectTaskService.DoneTask(id);
+            await _projectTaskService.DoneTask(request);
         }
 
-        [HttpPost]
-        [Route("Assign")]
-        public async Task Assign(int id, User user)
+        [HttpPost("Assign")]
+        public async Task Assign([FromBody] AssignTaskRequest request)
         {
-            await _projectTaskService.AssignTask(id, user);
+            await _projectTaskService.AssignTask(request);
         }
 
-        [HttpPost]
-        [Route("AddTaskTOProject")]
-        public async Task AddTaskToProject(int id, Project project)
+        [HttpPost("AddTaskTOProject")]
+        public async Task AddTaskToProject([FromBody] TaskToProjectRequest request)
         {
-            await _projectTaskService.AddTaskToProject(id, project);
+            await _projectTaskService.AddTaskToProject(request);
         }
     }

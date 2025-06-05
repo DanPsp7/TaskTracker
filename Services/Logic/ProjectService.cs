@@ -1,3 +1,4 @@
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services.Interfaces;
@@ -12,25 +13,23 @@ public class ProjectService : IProjectService
     {
         _projectRepository = projectRepository;
     }
-
-    public async Task CreateProject(Project project)
-    {
-        await _projectRepository.Create(project);
-    }
-    
     public async Task<List<Project>> GetProject()
     {
-        return await _projectRepository.Get() ;
+        return await _projectRepository.Get();
     }
 
-    public async Task UpdateProject(int id, Project project)
+    public async Task CreateProject(AddProjectRequest request)
     {
-        await _projectRepository.Update(id, project);
+        await _projectRepository.Create(request);
     }
 
-    public async Task DeleteProject(int id)
+    public async Task UpdateProject(UpdateProjectRequest request)
     {
-        await _projectRepository.Delete(id);
+        await _projectRepository.Update(request);
     }
-    
+
+    public async Task DeleteProject(DeleteProjectRequest request)
+    {
+        await _projectRepository.Delete(request);
+    }
 }

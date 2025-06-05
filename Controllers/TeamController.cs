@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services;
@@ -17,37 +18,33 @@ namespace TaskTracker.Controllers;
             _teamService = teamService;
         }
 
-        [HttpGet]
-        [Route("Get")]
+        [HttpGet("Get")]
         public async Task<List<Team>> Get()
         {
             return await _teamService.GetTeam();
         }
 
         [HttpPost("Create")]
-        public async Task Create([FromBody] Team team)
+        public async Task Create([FromBody] AddTeamRequest request)
         {
-            await _teamService.CreateTeam(team);
+            await _teamService.CreateTeam(request);
         }
 
-        [HttpPut]
-        [Route("Update")]
-        public async Task Update(int id, [FromBody] Team team)
+        [HttpPut("Update")]
+        public async Task Update([FromBody]  UpdateTeamRequest request)
         {
-            await _teamService.UpdateTeam(id, team);
+            await _teamService.UpdateTeam(request);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
-        public async Task Delete(int id)
+        [HttpDelete("Delete")]
+        public async Task Delete([FromBody] DeleteTeamRequest request)
         {
-            await _teamService.DeleteTeam(id);
+            await _teamService.DeleteTeam(request);
         }
 
-        [HttpPost]
-        [Route("AddTeamToProject")]
-        public async Task AddTeamToProject(int id, [FromBody] Project project)
+        [HttpPost("AddTeamToProject")]
+        public async Task AddTeamToProject([FromBody] TeamToProjectRequest request)
         {
-            await _teamService.AddTeamToProject(id, project);
+            await _teamService.AddTeamToProject(request);
         }
     }

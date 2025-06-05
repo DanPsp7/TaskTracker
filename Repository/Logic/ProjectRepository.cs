@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Data;
-using TaskTracker.Dto;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 
-namespace TrackTask.Repository.Logic;
+namespace TaskTracker.Repository.Logic;
 
 public class ProjectRepository : IProjectRepository
 {
@@ -15,9 +15,9 @@ public class ProjectRepository : IProjectRepository
         _context = context; 
     }
 
-    public async Task Create(Project project)
+    public async Task Create(AddProjectRequest request)
     {
-        _context.Add(project);
+        _context.Add(request);
         await _context.SaveChangesAsync();
     }
 
@@ -26,18 +26,18 @@ public class ProjectRepository : IProjectRepository
         return await _context.Projects.ToListAsync();
     }
 
-    public async Task Update(int id, Project project)
+    public async Task Update(UpdateProjectRequest request)
     {
-        var projects = await _context.Projects.SingleOrDefaultAsync(p => p.Id == id);
-        projects.Name = project.Name;
-        projects.Description = project.Description;
+        var projects = await _context.Projects.SingleOrDefaultAsync(p => p.Id == request.Id);
+        projects.Name = request.Name;
+        projects.Description = request.Description;
         await _context.SaveChangesAsync();
         
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(DeleteProjectRequest request)
     {
-        _context.Remove(await _context.Projects.FindAsync(id));
+        _context.Remove(await _context.Projects.FindAsync(request.Id));
         await _context.SaveChangesAsync();
     }
 }

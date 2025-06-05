@@ -1,6 +1,7 @@
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
+using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services.Interfaces;
-using TrackTask.Repository.Interfaces;
 
 namespace TaskTracker.Services.Logic;
 
@@ -18,23 +19,23 @@ public class UserService : IUserService
         return await _userRepository.GetAllUsers();
     }
 
-    public async Task CreateUser(User user)
+    public async Task CreateUser(AddUserRequest request)
     {
-        await _userRepository.CreateUser(user);
+        await _userRepository.CreateUser(request);
     }
 
-    public async Task UpdateUser(int id, User user)
+    public async Task UpdateUser(UpdateUserRequest request)
     {
-        await _userRepository.UpdateUser(id, user);
+        await _userRepository.UpdateUser(request);
     }
 
-    public async Task DeleteUser(int id)
+    public async Task DeleteUser(DeleteUserRequest request)
     {
-        await _userRepository.DeleteUser(id);
+        await _userRepository.DeleteUser(request);
     }
 
-    public async Task AddUserToTeam(int id, Team team)
+    public async Task AddUserToTeam(UserToTeamRequest request)
     {
-        await _userRepository.AddUserToTeam(id, team);
+        await _userRepository.AddUserToTeam(request);
     }
 }

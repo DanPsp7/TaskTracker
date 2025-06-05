@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Data;
-using TaskTracker.Dto;
 using TaskTracker.Models;
-using TrackTask.Repository.Interfaces;
+using TaskTracker.Repository.Interfaces;
 
-namespace TrackTask.Repository.Logic;
+namespace TaskTracker.Repository.Logic;
 
 public class UserRepository : IUserRepository
 {
@@ -22,29 +22,31 @@ public class UserRepository : IUserRepository
         return await _context.Users.ToListAsync();
     }
 
-    public async Task CreateUser(User user)
+    public async Task CreateUser(AddUserRequest request)
     {
-        _context.Users.Add(user);
+        User newUser = new User();
+        newUser.Name = request.Name;
+        _context.Users.Add(newUser);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateUser(int id, User user)
+    public async Task UpdateUser(UpdateUserRequest request)
     {
         var users = await _context.Users.FindAsync();
-        users.Name = user.Name;
+        users.Name = request.Name;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteUser(int id)
+    public async Task DeleteUser(DeleteUserRequest request)
     {
-        _context.Users.Remove(await _context.Users.FindAsync(id));
+        _context.Users.Remove(await _context.Users.FindAsync(request.Id));
         await _context.SaveChangesAsync();
     }
 
-    public async Task AddUserToTeam(int userId, Team team)
+    public async Task AddUserToTeam(UserToTeamRequest request)
     {
-        var users = await _context.Users.FindAsync(userId);
-        users.Team = team;
+        var users = await _context.Users.FindAsync(request.Id);
+        users.Team = request.Team;
         await _context.SaveChangesAsync();
     }
     

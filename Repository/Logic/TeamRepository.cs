@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Data;
-using TaskTracker.Dto;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 
-namespace TrackTask.Repository.Logic;
+namespace TaskTracker.Repository.Logic;
 
 public class TeamRepository : ITeamRepository
 {
@@ -21,28 +21,30 @@ public class TeamRepository : ITeamRepository
         return await _context.Teams.ToListAsync();
     }
 
-    public async Task CreateTeam(Team team)
-    {
+    public async Task CreateTeam(AddTeamRequest request)
+    {   
+        Team team = new Team();
+        team.Name = request.Name;
         _context.Teams.Add(team);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateTeam(int id, Team team)
+    public async Task UpdateTeam(UpdateTeamRequest request)
     {
-        var teams = await _context.Teams.FindAsync(id);
-        teams.Name = team.Name;
+        var teams = await _context.Teams.FindAsync(request.Id);
+        teams.Name = request.Name;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteTeam(int id)
+    public async Task DeleteTeam(DeleteTeamRequest request)
     {
-        _context.Remove(await _context.Teams.SingleOrDefaultAsync(t => t.Id == id));
+        _context.Remove(await _context.Teams.SingleOrDefaultAsync(t => t.Id == request.Id));
     }
 
-    public async Task AddTeamToProject(int teamId, Project project)
+    public async Task AddTeamToProject(TeamToProjectRequest request)
     {
-        var  teams = await _context.Teams.FindAsync(teamId);
-        teams.Project = project;
+        var  teams = await _context.Teams.FindAsync(request.Id);
+        teams.Project = request.Project;
         await _context.SaveChangesAsync();
     }
    

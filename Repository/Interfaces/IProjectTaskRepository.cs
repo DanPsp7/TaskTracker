@@ -1,3 +1,4 @@
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Dto;
 using TaskTracker.Models;
 
@@ -7,14 +8,14 @@ public interface IProjectTaskRepository
 {
     Task<List<ProjectTask>> GetTask();
     
-    Task CreateTask(ProjectTask task);
+    Task CreateTask(ProjectTask projectTask);
     
-    Task UpdateTask(int id, ProjectTask task);
+    Task UpdateTask(UpdateTaskRequest request);
     
-    Task DeleteTask(int id);
-    Task StartTask(int id);
-    Task StopTask(int id);
-    Task DoneTask(int id);
-    Task AssignTask(int id, User user);
-    Task AddTaskToProject(int id, Project project);
+    Task DeleteTask(DeleteTaskRequest request);
+    Task StartTask(ActionTaskRequest request);
+    Task StopTask(ActionTaskRequest request);
+    Task DoneTask(ActionTaskRequest request);
+    Task AssignTask(AssignTaskRequest request);
+    Task AddTaskToProject(TaskToProjectRequest request);
 }

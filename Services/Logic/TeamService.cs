@@ -1,3 +1,4 @@
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services.Interfaces;
@@ -18,23 +19,23 @@ public class TeamService : ITeamService
         return await _teamRepository.GetAllTeams();
     }
 
-    public async Task CreateTeam(Team team)
+    public async Task CreateTeam(AddTeamRequest request)
     {
-        await _teamRepository.CreateTeam(team);
+        await _teamRepository.CreateTeam(request);
     }
 
-    public async Task UpdateTeam(int id, Team team)
+    public async Task UpdateTeam(UpdateTeamRequest request)
     {
-        await _teamRepository.UpdateTeam(id, team);
+        await _teamRepository.UpdateTeam(request);
     }
 
-    public async Task DeleteTeam(int id)
+    public async Task DeleteTeam(DeleteTeamRequest request)
     {
-        await _teamRepository.DeleteTeam(id);
+        await _teamRepository.DeleteTeam(request);
     }
 
-    public async Task AddTeamToProject(int id, Project project)
+    public async Task AddTeamToProject(TeamToProjectRequest request)
     {
-        await _teamRepository.AddTeamToProject(id, project);
+        await _teamRepository.AddTeamToProject(request);
     }
 }

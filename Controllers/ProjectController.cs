@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Data;
 using TaskTracker.Dto;
 using TaskTracker.Models;
@@ -10,7 +11,7 @@ using TaskTracker.Services.Interfaces;
 namespace TaskTracker.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ProjectController : Controller
     {
 
@@ -21,34 +22,29 @@ namespace TaskTracker.Controllers
             _projectService = projectService;
         }
 
-        [HttpGet]
-        [Route("Get")]
-        [Produces("application/json")]
+        [HttpGet("Get")]
         public async Task<List<Project>> Get()
         {
             return await _projectService.GetProject();
         }
 
 
-        [HttpPost]
-        [Route("Create")]
-        public async Task Create(Project projectDto)
+        [HttpPost("Create")]
+        public async Task Create([FromBody] AddProjectRequest request)
         {
-            await _projectService.CreateProject(projectDto);
+            await _projectService.CreateProject(request);
         }
 
-        [HttpPut]
-        [Route("Update")]
-        public async Task Update(int id, Project projectDto)
+        [HttpPut("Update")]
+        public async Task Update([FromBody] UpdateProjectRequest request)
         {
-            await _projectService.UpdateProject(id, projectDto);
+            await _projectService.UpdateProject(request);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
-        public async Task Delete(int id)
+        [HttpDelete("Delete")]
+        public async Task Delete([FromBody] DeleteProjectRequest request)
         {
-            await _projectService.DeleteProject(id);
+            await _projectService.DeleteProject(request);
         }
     }
 }

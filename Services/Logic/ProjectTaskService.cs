@@ -1,6 +1,8 @@
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services.Interfaces;
+using TaskStatus = TaskTracker.Models.TaskStatus;
 
 namespace TaskTracker.Services.Logic;
 
@@ -19,44 +21,48 @@ public class ProjectTaskService : IProjectTaskService
         return await _projectTaskRepository.GetTask();
     }
     
-    public async Task CreateTask(ProjectTask task)
+    public async Task CreateTask(AddTaskRequest request)
     {
-        await  _projectTaskRepository.CreateTask(task);
+        var projectTask = new ProjectTask();
+        projectTask.Name = request.Name;
+        projectTask.Description = request.Description;
+        await  _projectTaskRepository.CreateTask(projectTask);
     }
     
-    public async Task UpdateTask (int id, ProjectTask task)
+    public async Task UpdateTask (UpdateTaskRequest request)
     {
-        await  _projectTaskRepository.UpdateTask(id, task);
+       
+        
+        await  _projectTaskRepository.UpdateTask(request);
+    }
+    
+    public async Task DeleteTask(DeleteTaskRequest request)
+    {
+        await  _projectTaskRepository.DeleteTask(request);
     }
 
-
-    public async Task DeleteTask(int id)
+    public async Task StartTask(ActionTaskRequest request)
     {
-        await  _projectTaskRepository.DeleteTask(id);
+        await _projectTaskRepository.StartTask(request);
     }
 
-    public async Task StartTask(int id)
+    public async Task StopTask(ActionTaskRequest request)
     {
-        await _projectTaskRepository.StartTask(id);
+        await _projectTaskRepository.StopTask(request);
     }
 
-    public async Task StopTask(int id)
+    public async Task DoneTask(ActionTaskRequest request)
     {
-        await _projectTaskRepository.StopTask(id);
+        await _projectTaskRepository.DoneTask(request);
     }
 
-    public async Task DoneTask(int id)
+    public async Task AssignTask(AssignTaskRequest request)
     {
-        await _projectTaskRepository.DoneTask(id);
+        await _projectTaskRepository.AssignTask(request);
     }
 
-    public async Task AssignTask(int id, User user)
+    public async Task AddTaskToProject(TaskToProjectRequest request)
     {
-        await _projectTaskRepository.AssignTask(id, user);
-    }
-
-    public async Task AddTaskToProject(int id, Project project)
-    {
-        await _projectTaskRepository.AddTaskToProject(id, project);
+        await _projectTaskRepository.AddTaskToProject(request);
     }
 }

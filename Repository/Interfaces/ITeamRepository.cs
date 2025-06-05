@@ -1,3 +1,4 @@
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Dto;
 using TaskTracker.Models;
 
@@ -7,12 +8,12 @@ public interface ITeamRepository
 {
     Task <List<Team>> GetAllTeams();
     
-    Task CreateTeam(Team  team);
+    Task CreateTeam(AddTeamRequest request);
     
-    Task UpdateTeam(int id, Team team);
+    Task UpdateTeam(UpdateTeamRequest request);
     
-    Task DeleteTeam(int id);
+    Task DeleteTeam(DeleteTeamRequest request);
     
-    Task AddTeamToProject(int id, Project project);
+    Task AddTeamToProject(TeamToProjectRequest request);
     
 }

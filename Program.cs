@@ -5,8 +5,6 @@ using TaskTracker.Repository.Interfaces;
 using TaskTracker.Repository.Logic;
 using TaskTracker.Services.Interfaces;
 using TaskTracker.Services.Logic;
-using TrackTask.Repository.Interfaces;
-using TrackTask.Repository.Logic;
 
 var builder = WebApplication.CreateBuilder(args);
 

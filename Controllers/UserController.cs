@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Services;
 using TaskTracker.Services.Interfaces;
@@ -7,7 +8,7 @@ namespace TaskTracker.Controllers;
 
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class UserController : Controller 
     {   
         private readonly IUserService _userService;
@@ -17,38 +18,33 @@ namespace TaskTracker.Controllers;
             _userService = userService;
         }
 
-        [HttpGet]
-        [Route("Get")]
+        [HttpGet("Get")]
         public async Task<List<User>> Get()
         {
             return await _userService.GetUser();
         }
         
-        [HttpPost]
-        [Route("Create ")]
-        public async Task Create([FromBody] User user)
+        [HttpPost("Create")]
+        public async Task Create([FromBody] AddUserRequest request)
         {
-            await _userService.CreateUser(user);
+            await _userService.CreateUser(request);
         }
 
-        [HttpPut]
-        [Route("Update ")]
-        public async Task Update(int id, [FromBody] User user)
+        [HttpPut("Update")]
+        public async Task Update([FromBody] UpdateUserRequest request)
         {
-            await _userService.UpdateUser(id, user);
+            await _userService.UpdateUser(request);
         }
 
-        [HttpDelete]
-        [Route("Delete")]
-        public async Task Delete(int id)
+        [HttpDelete("Delete")]
+        public async Task Delete([FromBody] DeleteUserRequest request)
         {
-            await _userService.DeleteUser(id);
+            await _userService.DeleteUser(request);
         }
 
-        [HttpPost]
-        [Route("AddUserToTeam")]
-        public async Task AddUserToTeam(int id, [FromBody] Team team)
+        [HttpPost("AddUserToTeam")]
+        public async Task AddUserToTeam([FromBody] UserToTeamRequest request)
         {
-            await _userService.AddUserToTeam(id, team);
+            await _userService.AddUserToTeam(request);
         }
     }

@@ -1,16 +1,16 @@
-using TaskTracker.Dto;
+using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 
-namespace TrackTask.Repository.Interfaces;
+namespace TaskTracker.Repository.Interfaces;
 
 public interface IUserRepository
 {
     Task <List<User>> GetAllUsers();
     
-    Task CreateUser(User user);
+    Task CreateUser(AddUserRequest request);
     
-    Task UpdateUser(int id, User user);
+    Task UpdateUser(UpdateUserRequest request);
     
-    Task DeleteUser(int id);
-    Task AddUserToTeam(int id, Team team);
+    Task DeleteUser(DeleteUserRequest request);
+    Task AddUserToTeam(UserToTeamRequest request);
 }
