@@ -26,6 +26,7 @@ public class UserRepository : IUserRepository
     {
         User newUser = new User();
         newUser.Name = request.Name;
+        newUser.TeamId = request.TeamId;
         _context.Users.Add(newUser);
         await _context.SaveChangesAsync();
     }

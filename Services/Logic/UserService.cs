@@ -1,4 +1,6 @@
 using TaskTracker.Controllers.Contracts;
+using TaskTracker.Dto;
+using TaskTracker.Mapper;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services.Interfaces;
@@ -14,9 +16,10 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async Task<List<User>> GetUser()
+    public async Task<List<UserDto>> GetUser()
     {
-        return await _userRepository.GetAllUsers();
+        var users= await _userRepository.GetAllUsers();
+        return users.MapUsers();
     }
 
     public async Task CreateUser(AddUserRequest request)

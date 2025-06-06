@@ -73,7 +73,7 @@ public class ProjectTaskRepository : IProjectTaskRepository
     public async Task AssignTask(AssignTaskRequest request)
     {
         var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == request.Id);
-        tasks.User =  request.User;
+        tasks.UserId =  request.UserId;
         await _context.SaveChangesAsync();
     }
 

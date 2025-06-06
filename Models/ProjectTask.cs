@@ -6,12 +6,12 @@ using TaskTracker.Models;
 namespace TaskTracker.Models
 {
     public enum TaskStatus
-    {
-        Free,       // Задача свободна
-        Working,    // В работе
-        Done,       // Завершена
-        Paused     // Приостановлена
-    }
+         {
+             Free,       // Задача свободна
+             Working,    // В работе
+             Done,       // Завершена
+             Paused     // Приостановлена
+         }
 
 
     public class ProjectTask
