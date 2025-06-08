@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Data;
-using TaskTracker.Dto;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskStatus = TaskTracker.Models.TaskStatus;

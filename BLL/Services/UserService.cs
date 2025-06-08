@@ -1,11 +1,10 @@
+using TaskTracker.BLL.Dto;
+using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
-using TaskTracker.Dto;
 using TaskTracker.Mapper;
-using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
-using TaskTracker.Services.Interfaces;
 
-namespace TaskTracker.Services.Logic;
+namespace TaskTracker.BLL.Services;
 
 public class UserService : IUserService
 {

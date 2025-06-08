@@ -1,7 +1,7 @@
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 
-namespace TaskTracker.Services.Interfaces;
+namespace TaskTracker.BLL.Interfaces;
 
 public interface IUserService
 {

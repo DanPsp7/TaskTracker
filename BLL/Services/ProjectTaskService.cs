@@ -1,10 +1,9 @@
+using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
-using TaskTracker.Services.Interfaces;
-using TaskStatus = TaskTracker.Models.TaskStatus;
 
-namespace TaskTracker.Services.Logic;
+namespace TaskTracker.BLL.Services;
 
 public class ProjectTaskService : IProjectTaskService
 {

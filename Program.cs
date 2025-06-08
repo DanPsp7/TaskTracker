@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using TaskTracker.BLL.Interfaces;
+using TaskTracker.BLL.Services;
 using TaskTracker.Data;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Repository.Logic;
-using TaskTracker.Services.Interfaces;
-using TaskTracker.Services.Logic;
 
 var builder = WebApplication.CreateBuilder(args);
 

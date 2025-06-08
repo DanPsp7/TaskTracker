@@ -1,9 +1,9 @@
+using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
-using TaskTracker.Services.Interfaces;
 
-namespace TaskTracker.Services.Logic;
+namespace TaskTracker.BLL.Services;
 
 public class TeamService : ITeamService
 {

@@ -1,5 +1,4 @@
 using TaskTracker.Controllers.Contracts;
-using TaskTracker.Dto;
 using TaskTracker.Models;
 
 namespace TaskTracker.Repository.Interfaces;

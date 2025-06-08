@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Data;
-using TaskTracker.Dto;
 using TaskTracker.Models;
 using TaskTracker.Services;
-using TaskTracker.Services.Interfaces;
 
 
 namespace TaskTracker.Controllers

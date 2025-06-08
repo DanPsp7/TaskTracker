@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Services;
-using TaskTracker.Services.Interfaces;
 
 namespace TaskTracker.Controllers;
 

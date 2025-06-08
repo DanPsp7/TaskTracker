@@ -1,4 +1,4 @@
-using TaskTracker.Dto;
+using TaskTracker.BLL.Dto;
 using TaskTracker.Models;
 
 namespace TaskTracker.Mapper;
