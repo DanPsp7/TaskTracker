@@ -5,12 +5,12 @@ namespace TaskTracker.Repository.Interfaces;
 
 public interface IUserRepository
 {
-    Task <List<User>> GetAllUsers();
+    Task <List<User>> GetUsers();
     
-    Task CreateUser(AddUserRequest request);
+    Task CreateUser(User  user);
     
-    Task UpdateUser(UpdateUserRequest request);
+    Task UpdateUser(int id, User user);
     
-    Task DeleteUser(DeleteUserRequest request);
-    Task AddUserToTeam(UserToTeamRequest request);
+    Task DeleteUser(int id);
+    Task AddUserToTeam(int userId, int teamId);
 }

@@ -15,9 +15,9 @@ public class ProjectRepository : IProjectRepository
         _context = context; 
     }
 
-    public async Task Create(AddProjectRequest request)
+    public async Task Create(Project project)
     {
-        _context.Add(request);
+        _context.Add(project);
         await _context.SaveChangesAsync();
     }
 
@@ -26,18 +26,18 @@ public class ProjectRepository : IProjectRepository
         return await _context.Projects.ToListAsync();
     }
 
-    public async Task Update(UpdateProjectRequest request)
+    public async Task Update(int id, Project project)
     {
-        var projects = await _context.Projects.SingleOrDefaultAsync(p => p.Id == request.Id);
-        projects.Name = request.Name;
-        projects.Description = request.Description;
+        var projects = await _context.Projects.SingleOrDefaultAsync(p => p.Id == id);
+        projects.Name = project.Name;
+        projects.Description = project.Description;
         await _context.SaveChangesAsync();
         
     }
 
-    public async Task Delete(DeleteProjectRequest request)
+    public async Task Delete(int id)
     {
-        _context.Remove(await _context.Projects.FindAsync(request.Id));
+        _context.Remove(await _context.Projects.FindAsync(id));
         await _context.SaveChangesAsync();
     }
 }

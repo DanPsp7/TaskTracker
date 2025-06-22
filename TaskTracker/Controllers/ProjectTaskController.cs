@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskTracker.BLL.Dto;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
-using TaskTracker.Services;
+
 
 namespace TaskTracker.Controllers;
 
@@ -21,56 +22,56 @@ namespace TaskTracker.Controllers;
         }
 
         [HttpGet("Get")]
-        public async Task<List<ProjectTask>> Get()
+        public async Task<List<ProjectTaskDto>> Get()
         {
             return await _projectTaskService.GetTask();
         }
 
         [HttpPost("Create")]
-        public async Task Create([FromBody] AddTaskRequest request)
+        public async Task Create([FromBody] ProjectTaskDto projectTaskDto)
         {
-            await _projectTaskService.CreateTask(request);
+            await _projectTaskService.CreateTask(projectTaskDto);
         }
 
         [HttpPut("Update")]
-        public async Task Update([FromBody] UpdateTaskRequest request)
+        public async Task Update([FromQuery] int id, [FromBody] ProjectTaskDto projectTaskDto)
         {
-            await _projectTaskService.UpdateTask(request);
+            await _projectTaskService.UpdateTask(id, projectTaskDto);
         }
 
         [HttpDelete("Delete")]
-        public async Task Delete([FromBody] DeleteTaskRequest request)
+        public async Task Delete([FromQuery] int id)
         {
-            await _projectTaskService.DeleteTask(request);
+            await _projectTaskService.DeleteTask(id);
         }
 
         [HttpPost("Start")]
-        public async Task Start([FromBody] ActionTaskRequest request)
+        public async Task Start([FromQuery] int id)
         {
-            await _projectTaskService.StartTask(request);
+            await _projectTaskService.StartTask(id);
         }
 
         [HttpPost("Stop")]
-        public async Task Stop([FromBody] ActionTaskRequest request)
+        public async Task Stop([FromQuery] int id)
         {
-            await _projectTaskService.StopTask(request);
+            await _projectTaskService.StopTask(id);
         }
 
         [HttpPost("Done")]
-        public async Task Done([FromBody] ActionTaskRequest request)
+        public async Task Done([FromQuery] int id)
         {
-            await _projectTaskService.DoneTask(request);
+            await _projectTaskService.DoneTask(id);
         }
 
         [HttpPost("Assign")]
-        public async Task Assign([FromBody] AssignTaskRequest request)
+        public async Task Assign([FromQuery] int taskId,[FromQuery] int userId)
         {
-            await _projectTaskService.AssignTask(request);
+            await _projectTaskService.AssignTask(taskId, userId);
         }
 
         [HttpPost("AddTaskTOProject")]
-        public async Task AddTaskToProject([FromBody] TaskToProjectRequest request)
+        public async Task AddTaskToProject([FromQuery] int taskId,[FromQuery] int projectId)
         {
-            await _projectTaskService.AddTaskToProject(request);
+            await _projectTaskService.AddTaskToProject(taskId, projectId);
         }
     }

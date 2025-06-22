@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskTracker.BLL.Dto;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
-using TaskTracker.Services;
+
 
 namespace TaskTracker.Controllers;
 
@@ -19,32 +20,32 @@ namespace TaskTracker.Controllers;
         }
 
         [HttpGet("Get")]
-        public async Task<List<User>> Get()
+        public async Task<List<UserDto>> Get()
         {
             return await _userService.GetUser();
         }
         
         [HttpPost("Create")]
-        public async Task Create([FromBody] AddUserRequest request)
+        public async Task Create([FromBody] UserDto userDto)
         {
-            await _userService.CreateUser(request);
+            await _userService.CreateUser(userDto);
         }
 
         [HttpPut("Update")]
-        public async Task Update([FromBody] UpdateUserRequest request)
+        public async Task Update([FromQuery] int id,[FromBody] UserDto userDto)
         {
-            await _userService.UpdateUser(request);
+            await _userService.UpdateUser(id, userDto);
         }
 
         [HttpDelete("Delete")]
-        public async Task Delete([FromBody] DeleteUserRequest request)
+        public async Task Delete([FromQuery]int id)
         {
-            await _userService.DeleteUser(request);
+            await _userService.DeleteUser(id);
         }
 
         [HttpPost("AddUserToTeam")]
-        public async Task AddUserToTeam([FromBody] UserToTeamRequest request)
+        public async Task AddUserToTeam([FromQuery]int userId,[FromQuery] int  teamId)
         {
-            await _userService.AddUserToTeam(request);
+            await _userService.AddUserToTeam(userId, teamId);
         }
     }

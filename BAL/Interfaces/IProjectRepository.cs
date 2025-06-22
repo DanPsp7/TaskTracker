@@ -7,6 +7,6 @@ public interface IProjectRepository
 {
     Task<List<Project>> Get();
     Task Create(Project project);
-    Task Update(Project project);
-    Task Delete(Project project);
+    Task Update(int id, Project project);
+    Task Delete(int id);
 }

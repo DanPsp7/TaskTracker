@@ -5,14 +5,14 @@ namespace TaskTracker.BLL.Interfaces;
 
 public interface IProjectTaskService
 {
-    Task<List<ProjectTask>> GetTask();
+    Task<List<ProjectTaskDto>> GetTask();
     //Task GetProjectById(int id);
     Task CreateTask(ProjectTaskDto  projectTaskDto);
-    Task UpdateTask(ProjectTaskDto  projectTaskDto);
-    Task DeleteTask(ProjectTaskDto  projectTaskDto);
-    Task StartTask(ProjectTaskDto  projectTaskDto);
-    Task StopTask(ProjectTaskDto  projectTaskDto);
-    Task DoneTask(ProjectTaskDto  projectTaskDto);
-    Task AssignTask(ProjectTaskDto  projectTaskDto);
-    Task AddTaskToProject(ProjectTaskDto  projectTaskDto);
+    Task UpdateTask(int id, ProjectTaskDto  projectTaskDto);
+    Task DeleteTask(int id);
+    Task StartTask(int id);
+    Task StopTask(int id);
+    Task DoneTask(int id);
+    Task AssignTask(int taskId, int projectId);
+    Task AddTaskToProject(int taskId, int projectId);
 }

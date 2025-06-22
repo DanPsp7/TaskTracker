@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TaskTracker.BLL.Dto;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Data;
 using TaskTracker.Models;
-using TaskTracker.Services;
 
 
 namespace TaskTracker.Controllers
@@ -22,28 +22,30 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet("Get")]
-        public async Task<List<Project>> Get()
+        public async Task<List<ProjectDto>> Get()
         {
             return await _projectService.GetProject();
         }
 
 
         [HttpPost("Create")]
-        public async Task Create([FromBody] AddProjectRequest request)
+        public async Task Create([FromBody] ProjectDto projectDto)
         {
-            await _projectService.CreateProject(request);
+            await _projectService.CreateProject(projectDto);
         }
 
         [HttpPut("Update")]
-        public async Task Update([FromBody] UpdateProjectRequest request)
+        public async Task Update(
+            [FromQuery] int id,
+            [FromBody] ProjectDto projectDto)
         {
-            await _projectService.UpdateProject(request);
+            await _projectService.UpdateProject(id, projectDto);
         }
 
         [HttpDelete("Delete")]
-        public async Task Delete([FromBody] DeleteProjectRequest request)
+        public async Task Delete([FromQuery] int id)
         {
-            await _projectService.DeleteProject(request);
+            await _projectService.DeleteProject(id);
         }
     }
 }

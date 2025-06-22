@@ -1,7 +1,8 @@
+using AutoMapper;
 using TaskTracker.BLL.Dto;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
-using TaskTracker.Mapper;
+using TaskTracker.Models;
 using TaskTracker.Repository.Interfaces;
 
 namespace TaskTracker.BLL.Services;
@@ -9,35 +10,38 @@ namespace TaskTracker.BLL.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-
-    public UserService(IUserRepository userRepository)
+    private readonly IMapper _mapper;
+    public UserService(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
     public async Task<List<UserDto>> GetUser()
     {
-        var users= await _userRepository.GetAllUsers();
-        return users.MapUsers();
+        var users= await _userRepository.GetUsers();
+        return _mapper.Map<List<UserDto>>(users);
     }
 
-    public async Task CreateUser(AddUserRequest request)
+    public async Task CreateUser(UserDto userDto)
     {
-        await _userRepository.CreateUser(request);
+        var  user = _mapper.Map<User>(userDto);
+        await _userRepository.CreateUser(user);
     }
 
-    public async Task UpdateUser(UpdateUserRequest request)
+    public async Task UpdateUser(int id, UserDto userDto)
     {
-        await _userRepository.UpdateUser(request);
+        var user = _mapper.Map<User>(userDto);
+        await _userRepository.UpdateUser(id, user);
     }
 
-    public async Task DeleteUser(DeleteUserRequest request)
+    public async Task DeleteUser(int id)
     {
-        await _userRepository.DeleteUser(request);
+        await _userRepository.DeleteUser(id);
     }
 
-    public async Task AddUserToTeam(UserToTeamRequest request)
+    public async Task AddUserToTeam(int userId, int teamId)
     {
-        await _userRepository.AddUserToTeam(request);
+        await _userRepository.AddUserToTeam(userId, teamId);
     }
 }

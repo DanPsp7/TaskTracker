@@ -16,11 +16,11 @@ public class ProjectService : IProjectService
         _projectRepository = projectRepository;
         _mapper = mapper;
     }
-    public async Task<ProjectDto> GetProject()
+    public async Task<List<ProjectDto>> GetProject()
     {
         
         var projects = await _projectRepository.Get();
-        return _mapper.Map<ProjectDto>(projects);
+        return _mapper.Map<List<ProjectDto>>(projects);
     }
 
     public async Task CreateProject(ProjectDto projectDto)
@@ -32,13 +32,14 @@ public class ProjectService : IProjectService
         await _projectRepository.Create(project);
     }
 
-    public async Task UpdateProject()
+    public async Task UpdateProject(int id, ProjectDto projectDto)
     {
-        await _projectRepository.Update();
+        var project = _mapper.Map<Project>(projectDto);
+        await _projectRepository.Update(id, project);
     }
 
-    public async Task DeleteProject()
+    public async Task DeleteProject(int id)
     {
-        await _projectRepository.Delete();
+        await _projectRepository.Delete(id);
     }
 }

@@ -28,58 +28,58 @@ public class ProjectTaskRepository : IProjectTaskRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateTask(UpdateTaskRequest request)
+    public async Task UpdateTask(int id,  ProjectTask projectTask)
     {
-        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == request.Id);
-        tasks.Name = request.Name;
-        tasks.Description = request.Description;
+        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == id);
+        tasks.Name = projectTask.Name;
+        tasks.Description = projectTask.Description;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteTask(DeleteTaskRequest request)
+    public async Task DeleteTask(int id)
     {
-        _context.ProjectTasks.Remove(await _context.ProjectTasks.FirstOrDefaultAsync(t => t.Id == request.Id)); 
+        _context.ProjectTasks.Remove(await _context.ProjectTasks.FirstOrDefaultAsync(t => t.Id == id)); 
         await _context.SaveChangesAsync();
     }
 
-    public async Task StartTask(ActionTaskRequest request)
+    public async Task StartTask(int id)
     {
-        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == request.Id);
+        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == id);
         tasks.Status = TaskStatus.Working;
         var startTime = DateTime.Now;
         tasks.SpentTime = startTime.TimeOfDay;
         await _context.SaveChangesAsync();
     }
 
-    public async Task StopTask(ActionTaskRequest request)
+    public async Task StopTask(int id)
     {
-        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == request.Id);
+        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == id);
         tasks.Status = TaskStatus.Paused;
         var stopTime = DateTime.Now;
         tasks.SpentTime = stopTime.TimeOfDay - tasks.SpentTime;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DoneTask(ActionTaskRequest request)
+    public async Task DoneTask(int id)
     {
-        var  tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == request.Id);
+        var  tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == id);
         tasks.Status = TaskStatus.Done;
         var doneTime = DateTime.Now;
         tasks.SpentTime = doneTime.TimeOfDay - tasks.SpentTime;
         await _context.SaveChangesAsync();
     }
 
-    public async Task AssignTask(AssignTaskRequest request)
+    public async Task AssignTask(int taskId, int userId)
     {
-        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == request.Id);
-        tasks.UserId =  request.UserId;
+        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == taskId);
+        tasks.UserId =  userId;
         await _context.SaveChangesAsync();
     }
 
-    public async Task AddTaskToProject(TaskToProjectRequest request)
+    public async Task AddTaskToProject(int taskId, int projectId)
     {
-        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == request.Id);
-        tasks.Project = request.Project;
+        var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == taskId);
+        tasks.ProjectId = projectId;
         await _context.SaveChangesAsync();
     }
 

@@ -1,3 +1,5 @@
+using AutoMapper;
+using TaskTracker.BLL.Dto;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
@@ -8,34 +10,43 @@ namespace TaskTracker.BLL.Services;
 public class TeamService : ITeamService
 {
     private readonly ITeamRepository _teamRepository;
-
-    public TeamService(ITeamRepository teamRepository)
+    private readonly IMapper _mapper;
+    public TeamService(ITeamRepository teamRepository, IMapper mapper)
     {
         _teamRepository = teamRepository;
+        _mapper = mapper;
+    }
+    
+    public async Task<List<TeamDto>> GetTeam()
+    {
+        var team = await _teamRepository.GetAllTeams();
+        return _mapper.Map<List<TeamDto>>(team);
     }
 
-    public async Task<List<Team>> GetTeam()
+    public async Task CreateTeam(AddTeamRequest teamDto)
     {
-        return await _teamRepository.GetAllTeams();
+        
+       //var team = _mapper.Map<Team>(teamDto);
+       var team = new()
+       {
+           Name = teamDto.Name,
+       };
+        await _teamRepository.CreateTeam(team);
     }
 
-    public async Task CreateTeam(AddTeamRequest request)
-    {
-        await _teamRepository.CreateTeam(request);
+    public async Task UpdateTeam(int id, TeamDto teamDto)
+    {   
+        var team = _mapper.Map<Team>(teamDto);
+        await _teamRepository.UpdateTeam(id, team);
     }
 
-    public async Task UpdateTeam(UpdateTeamRequest request)
+    public async Task DeleteTeam(int id)
     {
-        await _teamRepository.UpdateTeam(request);
+        await _teamRepository.DeleteTeam(id);
     }
 
-    public async Task DeleteTeam(DeleteTeamRequest request)
+    public async Task AddTeamToProject(int teamId, int projectId)
     {
-        await _teamRepository.DeleteTeam(request);
-    }
-
-    public async Task AddTeamToProject(TeamToProjectRequest request)
-    {
-        await _teamRepository.AddTeamToProject(request);
+        await _teamRepository.AddTeamToProject(teamId, projectId);
     }
 }

@@ -1,3 +1,5 @@
+using AutoMapper;
+using TaskTracker.BLL.Dto;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.Controllers.Contracts;
 using TaskTracker.Models;
@@ -8,60 +10,62 @@ namespace TaskTracker.BLL.Services;
 public class ProjectTaskService : IProjectTaskService
 {
     private readonly IProjectTaskRepository _projectTaskRepository;
-
-    public ProjectTaskService(IProjectTaskRepository projectTaskRepository)
+    private readonly IMapper  _mapper;
+    public ProjectTaskService(IProjectTaskRepository projectTaskRepository, IMapper mapper)
     {
         _projectTaskRepository = projectTaskRepository;
+        _mapper = mapper;
     }
 
 
-    public async Task<List<ProjectTask>> GetTask()
+    public async Task<List<ProjectTaskDto>> GetTask()
     {
-        return await _projectTaskRepository.GetTask();
+        var projectTask = await _projectTaskRepository.GetTask();
+        return _mapper.Map<List<ProjectTaskDto>>(projectTask);
     }
     
-    public async Task CreateTask(AddTaskRequest request)
+    public async Task CreateTask(ProjectTaskDto projectTaskDto)
     {
-        var projectTask = new ProjectTask();
-        projectTask.Name = request.Name;
-        projectTask.Description = request.Description;
+        var projectTask = _mapper.Map<ProjectTask>(projectTaskDto);
+        
         await  _projectTaskRepository.CreateTask(projectTask);
     }
     
-    public async Task UpdateTask (UpdateTaskRequest request)
+    public async Task UpdateTask (int id, ProjectTaskDto projectTaskDto)
     {
-       
+        var projectTask = _mapper.Map<ProjectTask>(projectTaskDto);
         
-        await  _projectTaskRepository.UpdateTask(request);
+        await  _projectTaskRepository.UpdateTask(id, projectTask);
     }
     
-    public async Task DeleteTask(DeleteTaskRequest request)
+    public async Task DeleteTask(int id)
     {
-        await  _projectTaskRepository.DeleteTask(request);
+        
+        await  _projectTaskRepository.DeleteTask(id);
     }
 
-    public async Task StartTask(ActionTaskRequest request)
+    public async Task StartTask(int id)
     {
-        await _projectTaskRepository.StartTask(request);
+        await _projectTaskRepository.StartTask(id);
     }
 
-    public async Task StopTask(ActionTaskRequest request)
+    public async Task StopTask(int id)
     {
-        await _projectTaskRepository.StopTask(request);
+        await _projectTaskRepository.StopTask(id);
     }
 
-    public async Task DoneTask(ActionTaskRequest request)
+    public async Task DoneTask(int id)
     {
-        await _projectTaskRepository.DoneTask(request);
+        await _projectTaskRepository.DoneTask(id);
     }
 
-    public async Task AssignTask(AssignTaskRequest request)
+    public async Task AssignTask(int taskId , int userId)
     {
-        await _projectTaskRepository.AssignTask(request);
+        await _projectTaskRepository.AssignTask(taskId, userId);
     }
 
-    public async Task AddTaskToProject(TaskToProjectRequest request)
+    public async Task AddTaskToProject(int taskId, int projectId)
     {
-        await _projectTaskRepository.AddTaskToProject(request);
+        await _projectTaskRepository.AddTaskToProject(taskId, projectId);
     }
 }

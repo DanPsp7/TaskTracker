@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using TaskTracker.BLL;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.BLL.Services;
 using TaskTracker.Data;
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IProjectTaskRepository, ProjectTaskRepository>();
 builder.Services.AddScoped<IProjectTaskService, ProjectTaskService>();
 
+builder.Services.AddAutoMapper(typeof(TaskTrackerProfile));
 
 builder.Services.AddSwaggerGen(c =>
 {

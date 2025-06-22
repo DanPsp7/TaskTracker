@@ -17,37 +17,34 @@ public class UserRepository : IUserRepository
     }
 
 
-    public async Task<List<User>> GetAllUsers()
+    public async Task<List<User>> GetUsers()
     {
         return await _context.Users.ToListAsync();
     }
 
-    public async Task CreateUser(AddUserRequest request)
+    public async Task CreateUser(User user)
     {
-        User newUser = new User();
-        newUser.Name = request.Name;
-        newUser.TeamId = request.TeamId;
-        _context.Users.Add(newUser);
+        _context.Users.Add(user);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateUser(UpdateUserRequest request)
+    public async Task UpdateUser(int id, User user)
     {
         var users = await _context.Users.FindAsync();
-        users.Name = request.Name;
+        users.Name = user.Name;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteUser(DeleteUserRequest request)
+    public async Task DeleteUser(int id)
     {
-        _context.Users.Remove(await _context.Users.FindAsync(request.Id));
+        _context.Users.Remove(await _context.Users.FindAsync(id));
         await _context.SaveChangesAsync();
     }
 
-    public async Task AddUserToTeam(UserToTeamRequest request)
+    public async Task AddUserToTeam(int userId, int teamId)
     {
-        var users = await _context.Users.FindAsync(request.Id);
-        users.Team = request.Team;
+        var users = await _context.Users.FindAsync(userId);
+        users.TeamId = teamId;
         await _context.SaveChangesAsync();
     }
     

@@ -9,12 +9,12 @@ public interface IProjectTaskRepository
     
     Task CreateTask(ProjectTask projectTask);
     
-    Task UpdateTask(UpdateTaskRequest request);
+    Task UpdateTask(int id, ProjectTask projectTask);
     
-    Task DeleteTask(DeleteTaskRequest request);
-    Task StartTask(ActionTaskRequest request);
-    Task StopTask(ActionTaskRequest request);
-    Task DoneTask(ActionTaskRequest request);
-    Task AssignTask(AssignTaskRequest request);
-    Task AddTaskToProject(TaskToProjectRequest request);
+    Task DeleteTask(int id);
+    Task StartTask(int id);
+    Task StopTask(int id);
+    Task DoneTask(int id);
+    Task AssignTask(int taskId, int userId);
+    Task AddTaskToProject(int taskId, int projectId);
 }

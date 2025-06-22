@@ -7,12 +7,12 @@ public interface ITeamRepository
 {
     Task <List<Team>> GetAllTeams();
     
-    Task CreateTeam(AddTeamRequest request);
+    Task CreateTeam(Team team);
     
-    Task UpdateTeam(UpdateTeamRequest request);
+    Task UpdateTeam(int id, Team team);
     
-    Task DeleteTeam(DeleteTeamRequest request);
+    Task DeleteTeam(int id);
     
-    Task AddTeamToProject(TeamToProjectRequest request);
+    Task AddTeamToProject(int teamId, int projectId);
     
 }

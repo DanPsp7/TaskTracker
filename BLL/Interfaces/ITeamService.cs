@@ -7,8 +7,8 @@ public interface ITeamService
 {
     Task<List<TeamDto>> GetTeam();
     //Task GetProjectById(int id);
-    Task CreateTeam(TeamDto teamDto);
-    Task UpdateTeam(TeamDto teamDto);
-    Task DeleteTeam(TeamDto teamDto);
-    Task AddTeamToProject(TeamDto teamDto);
+    Task CreateTeam(AddTeamRequest teamDto);
+    Task UpdateTeam(int id, TeamDto teamDto);
+    Task DeleteTeam(int id);
+    Task AddTeamToProject(int teamId, int projectId);
 }

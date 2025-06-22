@@ -21,30 +21,28 @@ public class TeamRepository : ITeamRepository
         return await _context.Teams.ToListAsync();
     }
 
-    public async Task CreateTeam(AddTeamRequest request)
+    public async Task CreateTeam(Team team)
     {   
-        Team team = new Team();
-        team.Name = request.Name;
         _context.Teams.Add(team);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateTeam(UpdateTeamRequest request)
+    public async Task UpdateTeam(int id, Team team)
     {
-        var teams = await _context.Teams.FindAsync(request.Id);
-        teams.Name = request.Name;
+        var teams = await _context.Teams.FindAsync(id);
+        teams.Name = team.Name;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteTeam(DeleteTeamRequest request)
+    public async Task DeleteTeam(int id)
     {
-        _context.Remove(await _context.Teams.SingleOrDefaultAsync(t => t.Id == request.Id));
+        _context.Remove(await _context.Teams.SingleOrDefaultAsync(t => t.Id == id));
     }
 
-    public async Task AddTeamToProject(TeamToProjectRequest request)
+    public async Task AddTeamToProject(int teamId, int projectId)
     {
-        var  teams = await _context.Teams.FindAsync(request.Id);
-        teams.Project = request.Project;
+        var  team = await _context.Teams.FindAsync(teamId);
+        team.ProjectId = projectId;
         await _context.SaveChangesAsync();
     }
    
