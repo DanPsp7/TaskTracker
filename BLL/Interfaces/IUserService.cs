@@ -6,10 +6,10 @@ namespace TaskTracker.BLL.Interfaces;
 
 public interface IUserService
 {
-    Task<List<UserDto>> GetUser();
+    Task<List<GetUserRequest>> GetUser();
     //Task GetProjectById(int id);
-    Task CreateUser(UserDto userDto);
-    Task UpdateUser(int id, UserDto userDto);
+    Task CreateUser(AddUserRequest addUserRequest);
+    Task UpdateUser(int id, UpdateUserRequest updateUserRequest);
     Task DeleteUser(int id);
     Task AddUserToTeam(int userId, int teamId);
 }

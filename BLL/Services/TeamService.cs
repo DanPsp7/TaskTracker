@@ -17,26 +17,22 @@ public class TeamService : ITeamService
         _mapper = mapper;
     }
     
-    public async Task<List<TeamDto>> GetTeam()
+    public async Task<List<GetTeamRequest>> GetTeam()
     {
         var team = await _teamRepository.GetAllTeams();
-        return _mapper.Map<List<TeamDto>>(team);
+        return _mapper.Map<List<GetTeamRequest>>(team);
     }
 
-    public async Task CreateTeam(AddTeamRequest teamDto)
+    public async Task CreateTeam(AddTeamRequest addTeamRequest)
     {
         
-       //var team = _mapper.Map<Team>(teamDto);
-       var team = new()
-       {
-           Name = teamDto.Name,
-       };
-        await _teamRepository.CreateTeam(team);
+       var team = _mapper.Map<Team>(addTeamRequest);
+       await _teamRepository.CreateTeam(team);
     }
 
-    public async Task UpdateTeam(int id, TeamDto teamDto)
+    public async Task UpdateTeam(int id, UpdateTeamRequest updateTeamRequest)
     {   
-        var team = _mapper.Map<Team>(teamDto);
+        var team = _mapper.Map<Team>(updateTeamRequest);
         await _teamRepository.UpdateTeam(id, team);
     }
 

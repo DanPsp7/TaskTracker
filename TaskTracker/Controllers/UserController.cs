@@ -20,21 +20,21 @@ namespace TaskTracker.Controllers;
         }
 
         [HttpGet("Get")]
-        public async Task<List<UserDto>> Get()
+        public async Task<List<GetUserRequest>> Get()
         {
             return await _userService.GetUser();
         }
         
         [HttpPost("Create")]
-        public async Task Create([FromBody] UserDto userDto)
+        public async Task Create([FromBody] AddUserRequest addUserRequest)
         {
-            await _userService.CreateUser(userDto);
+            await _userService.CreateUser(addUserRequest);
         }
 
         [HttpPut("Update")]
-        public async Task Update([FromQuery] int id,[FromBody] UserDto userDto)
+        public async Task Update([FromQuery] int id,[FromBody] UpdateUserRequest updateUserRequest)
         {
-            await _userService.UpdateUser(id, userDto);
+            await _userService.UpdateUser(id, updateUserRequest);
         }
 
         [HttpDelete("Delete")]

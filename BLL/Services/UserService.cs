@@ -17,21 +17,21 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<List<UserDto>> GetUser()
+    public async Task<List<GetUserRequest>> GetUser()
     {
         var users= await _userRepository.GetUsers();
-        return _mapper.Map<List<UserDto>>(users);
+        return _mapper.Map<List<GetUserRequest>>(users);
     }
 
-    public async Task CreateUser(UserDto userDto)
+    public async Task CreateUser(AddUserRequest addUserRequest)
     {
-        var  user = _mapper.Map<User>(userDto);
+        var  user = _mapper.Map<User>(addUserRequest);
         await _userRepository.CreateUser(user);
     }
 
-    public async Task UpdateUser(int id, UserDto userDto)
+    public async Task UpdateUser(int id, UpdateUserRequest updateUserRequest)
     {
-        var user = _mapper.Map<User>(userDto);
+        var user = _mapper.Map<User>(updateUserRequest);
         await _userRepository.UpdateUser(id, user);
     }
 

@@ -12,4 +12,6 @@ public class GetTaskRequest
 
     [Column(TypeName = "time")]
     public TimeSpan SpentTime { get; set; }
+    
+    public int userId {  get; set; }
 }

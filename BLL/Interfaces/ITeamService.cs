@@ -5,10 +5,10 @@ namespace TaskTracker.BLL.Interfaces;
 
 public interface ITeamService
 {
-    Task<List<TeamDto>> GetTeam();
+    Task<List<GetTeamRequest>> GetTeam();
     //Task GetProjectById(int id);
-    Task CreateTeam(AddTeamRequest teamDto);
-    Task UpdateTeam(int id, TeamDto teamDto);
+    Task CreateTeam(AddTeamRequest addTeamRequest);
+    Task UpdateTeam(int id, UpdateTeamRequest updateTeamRequest);
     Task DeleteTeam(int id);
     Task AddTeamToProject(int teamId, int projectId);
 }

@@ -20,21 +20,21 @@ namespace TaskTracker.Controllers;
         }
 
         [HttpGet("Get")]
-        public async Task<List<TeamDto>> Get()
+        public async Task<List<GetTeamRequest>> Get()
         {
             return await _teamService.GetTeam();
         }
 
         [HttpPost("Create")]
-        public async Task Create([FromBody] AddTeamRequest teamDto)
+        public async Task Create([FromBody] AddTeamRequest addTeamRequest)
         {
-            await _teamService.CreateTeam(teamDto);
+            await _teamService.CreateTeam(addTeamRequest);
         }
 
         [HttpPut("Update")]
-        public async Task Update([FromQuery] int id, [FromBody] TeamDto teamDto)
+        public async Task Update([FromQuery] int id, [FromBody] UpdateTeamRequest updateTeamRequest)
         {
-            await _teamService.UpdateTeam(id, teamDto);
+            await _teamService.UpdateTeam(id, updateTeamRequest);
         }
 
         [HttpDelete("Delete")]

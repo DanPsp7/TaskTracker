@@ -22,24 +22,24 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet("Get")]
-        public async Task<List<ProjectDto>> Get()
+        public async Task<List<GetProjectRequest>> Get()
         {
             return await _projectService.GetProject();
         }
 
 
         [HttpPost("Create")]
-        public async Task Create([FromBody] ProjectDto projectDto)
+        public async Task Create([FromBody] AddProjectRequest addProjectRequest)
         {
-            await _projectService.CreateProject(projectDto);
+            await _projectService.CreateProject(addProjectRequest);
         }
 
         [HttpPut("Update")]
         public async Task Update(
             [FromQuery] int id,
-            [FromBody] ProjectDto projectDto)
+            [FromBody] UpdateProjectRequest updateProjectRequest)
         {
-            await _projectService.UpdateProject(id, projectDto);
+            await _projectService.UpdateProject(id, updateProjectRequest);
         }
 
         [HttpDelete("Delete")]

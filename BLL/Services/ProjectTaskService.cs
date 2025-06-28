@@ -18,22 +18,22 @@ public class ProjectTaskService : IProjectTaskService
     }
 
 
-    public async Task<List<ProjectTaskDto>> GetTask()
+    public async Task<List<GetTaskRequest>> GetTask()
     {
         var projectTask = await _projectTaskRepository.GetTask();
-        return _mapper.Map<List<ProjectTaskDto>>(projectTask);
+        return _mapper.Map<List<GetTaskRequest>>(projectTask);
     }
     
-    public async Task CreateTask(ProjectTaskDto projectTaskDto)
+    public async Task CreateTask(AddTaskRequest addTaskRequest)
     {
-        var projectTask = _mapper.Map<ProjectTask>(projectTaskDto);
+        var projectTask = _mapper.Map<ProjectTask>(addTaskRequest);
         
         await  _projectTaskRepository.CreateTask(projectTask);
     }
     
-    public async Task UpdateTask (int id, ProjectTaskDto projectTaskDto)
+    public async Task UpdateTask (int id,UpdateTaskRequest updateTaskRequest)
     {
-        var projectTask = _mapper.Map<ProjectTask>(projectTaskDto);
+        var projectTask = _mapper.Map<ProjectTask>(updateTaskRequest);
         
         await  _projectTaskRepository.UpdateTask(id, projectTask);
     }

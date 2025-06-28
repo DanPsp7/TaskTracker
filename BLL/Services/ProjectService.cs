@@ -16,25 +16,25 @@ public class ProjectService : IProjectService
         _projectRepository = projectRepository;
         _mapper = mapper;
     }
-    public async Task<List<ProjectDto>> GetProject()
+    public async Task<List<GetProjectRequest>> GetProject()
     {
         
         var projects = await _projectRepository.Get();
-        return _mapper.Map<List<ProjectDto>>(projects);
+        return _mapper.Map<List<GetProjectRequest>>(projects);
     }
 
-    public async Task CreateProject(ProjectDto projectDto)
+    public async Task CreateProject(AddProjectRequest addProjectRequest)
     {
         // Маппим DTO в доменную модель
-        var project = _mapper.Map<Project>(projectDto);
+        var project = _mapper.Map<Project>(addProjectRequest);
         
         // Передаем доменную модель в репозиторий
         await _projectRepository.Create(project);
     }
 
-    public async Task UpdateProject(int id, ProjectDto projectDto)
+    public async Task UpdateProject(int id, UpdateProjectRequest updateProjectRequest)
     {
-        var project = _mapper.Map<Project>(projectDto);
+        var project = _mapper.Map<Project>(updateProjectRequest);
         await _projectRepository.Update(id, project);
     }
 
