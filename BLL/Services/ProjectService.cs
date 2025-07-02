@@ -40,6 +40,7 @@ public class ProjectService : IProjectService
 
     public async Task DeleteProject(int id)
     {
+        
         await _projectRepository.Delete(id);
     }
 }

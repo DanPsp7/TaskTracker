@@ -35,9 +35,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task Update(
-            [FromQuery] int id,
-            [FromBody] UpdateProjectRequest updateProjectRequest)
+        public async Task Update([FromQuery] int id, [FromBody] UpdateProjectRequest updateProjectRequest)
         {
             await _projectService.UpdateProject(id, updateProjectRequest);
         }
@@ -45,6 +43,7 @@ namespace TaskTracker.Controllers
         [HttpDelete("Delete")]
         public async Task Delete([FromQuery] int id)
         {
+            
             await _projectService.DeleteProject(id);
         }
     }

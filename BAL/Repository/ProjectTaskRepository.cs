@@ -31,23 +31,31 @@ public class ProjectTaskRepository : IProjectTaskRepository
     public async Task UpdateTask(int id,  ProjectTask projectTask)
     {
         var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == id);
-        tasks.Name = projectTask.Name;
-        tasks.Description = projectTask.Description;
+        if (tasks != null)
+        {
+            tasks.Name = projectTask.Name;
+            tasks.Description = projectTask.Description;
+        }
+
         await _context.SaveChangesAsync();
     }
 
     public async Task DeleteTask(int id)
     {
-        _context.ProjectTasks.Remove(await _context.ProjectTasks.FirstOrDefaultAsync(t => t.Id == id)); 
+        _context.ProjectTasks.Remove(await _context.ProjectTasks.FirstOrDefaultAsync(t => t.Id == id) ?? throw new EntityNotFoundException($"Invalid task id:{id}")); 
         await _context.SaveChangesAsync();
     }
 
     public async Task StartTask(int id)
     {
         var tasks = _context.ProjectTasks.FirstOrDefault(t => t.Id == id);
-        tasks.Status = TaskStatus.Working;
-        var startTime = DateTime.Now;
-        tasks.SpentTime = startTime.TimeOfDay;
+        if (tasks != null)
+        {
+            tasks.Status = TaskStatus.Working;
+            var startTime = DateTime.Now;
+            tasks.SpentTime = startTime.TimeOfDay;
+        }
+
         await _context.SaveChangesAsync();
     }
 

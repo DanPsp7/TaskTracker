@@ -30,13 +30,18 @@ public class TeamRepository : ITeamRepository
     public async Task UpdateTeam(int id, Team team)
     {
         var teams = await _context.Teams.FindAsync(id);
-        teams.Name = team.Name;
+        if (teams != null)
+        {
+            teams.Name = team.Name;
+        }
+        
         await _context.SaveChangesAsync();
     }
 
     public async Task DeleteTeam(int id)
     {
-        _context.Remove(await _context.Teams.SingleOrDefaultAsync(t => t.Id == id));
+        _context.Teams.Remove(await _context.Teams.FirstOrDefaultAsync(t => t.Id == id) ?? throw new EntityNotFoundException($"Invalid task id:{id}")); 
+        await _context.SaveChangesAsync();
     }
 
     public async Task AddTeamToProject(int teamId, int projectId)

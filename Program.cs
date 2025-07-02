@@ -4,6 +4,7 @@ using TaskTracker.BLL;
 using TaskTracker.BLL.Interfaces;
 using TaskTracker.BLL.Services;
 using TaskTracker.Data;
+using TaskTracker.Middlewares;
 using TaskTracker.Repository.Interfaces;
 using TaskTracker.Repository.Logic;
 
@@ -57,6 +58,8 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
     });
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

@@ -31,20 +31,20 @@ public class UserRepository : IUserRepository
     public async Task UpdateUser(int id, User user)
     {
         var users = await _context.Users.FindAsync();
-        users.Name = user.Name;
+        if (users != null) users.Name = user.Name;
         await _context.SaveChangesAsync();
     }
 
     public async Task DeleteUser(int id)
     {
-        _context.Users.Remove(await _context.Users.FindAsync(id));
+        _context.Users.Remove(await _context.Users.FirstOrDefaultAsync(t => t.Id == id) ?? throw new EntityNotFoundException($"Invalid task id:{id}")); 
         await _context.SaveChangesAsync();
     }
 
     public async Task AddUserToTeam(int userId, int teamId)
     {
         var users = await _context.Users.FindAsync(userId);
-        users.TeamId = teamId;
+        if (users != null) users.TeamId = teamId;
         await _context.SaveChangesAsync();
     }
     
